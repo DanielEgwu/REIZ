@@ -1,0 +1,33 @@
+:root{
+    --blue:#548FF4;
+    --dark-white:#C8D7E3;
+}
+*{
+    font-family:sans-serif;
+}
+.cover{
+    background-color: var(--dark-white);
+    height: 100%;
+    padding:3rem 0;
+}
+
+.wrapper{
+    background-color: var(--blue) !important;
+    margin:3rem 0;
+    width: 100%;
+    padding:0.5rem 1rem;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.country-wrapper{
+    background-color: white;
+    padding:0.5rem 0.3rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
+}
+
+ul{
+    list-style: none;
+    padding: 0px 10px;
+}
