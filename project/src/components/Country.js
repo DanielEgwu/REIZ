@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Country({ country }) {
+  
   return (
     <div>
       <div className='country-wrapper m-3'>
