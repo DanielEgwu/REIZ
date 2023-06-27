@@ -1,19 +1,21 @@
-import React, { Fragment, useEffect, useState, createContext } from 'react';
-import ReactPaginate from 'react-paginate';
-import MyContext from './Context';
+import React, { Fragment, useEffect, useState,  } from 'react';
 import Filter from './Filter';
 import Country from './Country';
 
 
 function CountryList() {
     const [data, setData] = useState([]);
-    const [sorteddata, setsortedData] = useState([]);
+    const [sorted, setSorted] = useState([]);
     const [isLoaded, setisLoaded] = useState(false);
 
+    const DESC = () => {
+        const new_data = [...data].sort((a, b) => b.name.localeCompare(a.name))
+        setSorted(new_data)
+    }
+
     const ASC = () => {
-        const sorteddata = data.sort((a, b) => b.name.localeCompare(a.name))
-        setData(sorteddata)
-        console.log(data)
+        const new_data = [...data].sort((a, b) => a.name.localeCompare(b.name))
+        setSorted(new_data)
     }
 
     useEffect(() => {
@@ -35,10 +37,10 @@ function CountryList() {
 
     return (
         <Fragment>
-            <Filter asc={ASC} />
+            <Filter desc={DESC} asc={ASC} />
             {
-              sorteddata.length > 0
-              ? <Country country='me'>me</Country>
+              sorted.length > 0
+              ? sorted.map(item => <Country key={item.name} country={item} />)
               : data.map(item => <Country key={item.name} country={item} />)
                 // data.map(item => <Country key={item.name} country={item} />)
             }
