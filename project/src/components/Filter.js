@@ -13,12 +13,15 @@ function Filter(props) {
 
                 <div className='d-md-flex  gap-3'>
 
-                    <button onClick={props.filterarea} className={`${props.region == 1 ? 'disabled':''} ${customclass} `}>Filter by smaller than Lithuania by area.</button>
+                    <button onClick={props.filterarea} className={`${props.region == 1 ? 'disabled' : ''} ${customclass} `}>Filter by smaller than Lithuania by area.</button>
 
                     <button onClick={props.oceanicregion} className='btn btn-success rounded-3 mb-md-2 mb-3  '>Oceania region</button>
                 </div >
+                <div className='d-flex justify-content-center'>
+                    <button onClick={props.reset} className='btn btn-dark rounded-3 me-4' >Reset</button>
+                </div>
                 <div className=' d-md-flex d-block gap-3 '>
-                    <button onClick={props.reset} className='btn btn-warning rounded-3 me-4' >Reset</button>
+
 
                     <button onClick={props.asc} className='btn btn-warning rounded-3 me-4' >Sort by Ascending</button>
 

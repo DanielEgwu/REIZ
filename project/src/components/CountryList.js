@@ -6,6 +6,7 @@ import Country from './Country';
 function CountryList() {
     const [data, setData] = useState([]);
     const [sorted, setSorted] = useState([]);
+    const [reload, setReload] = useState(0);
     const [isLoaded, setisLoaded] = useState(false);
     const [region, setRegion] = useState(0);
 
@@ -13,16 +14,19 @@ function CountryList() {
     const desc = () => {
         const new_data = [...data].sort((a, b) => b.name.localeCompare(a.name));
         setSorted(new_data);
+        setReload(0)
     }
 
     const asc = () => {
         const new_data = [...data].sort((a, b) => a.name.localeCompare(b.name));
         setSorted(new_data);
+        setReload(0)
     }
     const filterArea = () => {
         const areafilter = data.filter(country => country.area < 65300);
         setData(areafilter);
         console.log(areafilter)
+        setReload(0)
     }
 
     const oceanicRegion = () => {
@@ -30,26 +34,27 @@ function CountryList() {
             'Solomon Islands', 'Vanuatu', 'Fiji', 'Palau', 'Micronesia', 'Marshall Islands', 'Kiribati', 'Nauru'
         ]
         setRegion(1)
-        // const searchfilter = ['Afghanistan']
         const filter = data.filter(country => searchfilter.includes(country.name));
         setData(filter);
-        console.log(filter)
+        setReload(0);
     }
+    const reset = () => {
 
-
-    const reset = async () => {
-        try {
-            const response = await fetch('https://restcountries.com/v2/all?fields=name,region,area');
-            const countries = await response.json();
-            setData(countries);
-            setisLoaded(true);
-            console.log(Math.ceil(countries.length / 5))
-            setRegion(0)
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://restcountries.com/v2/all?fields=name,region,area');
+                const countries = await response.json();
+                setData(countries);
+                setisLoaded(true);
+                console.log(Math.ceil(countries.length / 5))
+                setRegion(0)
+                setReload(1)
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -78,7 +83,7 @@ function CountryList() {
                 reset={reset}
             />
             {
-                sorted.length > 0
+                sorted.length > 0 && reload == 0
                     ? sorted.map(item => <Country key={item.name} country={item} />)
                     : data.map(item => <Country key={item.name} country={item} />)
                 // data.map(item => <Country key={item.name} country={item} />)
