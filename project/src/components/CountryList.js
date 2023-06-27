@@ -8,14 +8,17 @@ function CountryList() {
     const [sorted, setSorted] = useState([]);
     const [isLoaded, setisLoaded] = useState(false);
 
-    const DESC = () => {
+    const desc = () => {
         const new_data = [...data].sort((a, b) => b.name.localeCompare(a.name))
         setSorted(new_data)
     }
 
-    const ASC = () => {
+    const asc = () => {
         const new_data = [...data].sort((a, b) => a.name.localeCompare(b.name))
         setSorted(new_data)
+    }
+    const filterArea = () =>{
+
     }
 
     useEffect(() => {
@@ -37,7 +40,7 @@ function CountryList() {
 
     return (
         <Fragment>
-            <Filter desc={DESC} asc={ASC} />
+            <Filter desc={desc} asc={asc} />
             {
               sorted.length > 0
               ? sorted.map(item => <Country key={item.name} country={item} />)
