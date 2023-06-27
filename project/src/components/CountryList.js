@@ -7,7 +7,7 @@ function CountryList() {
     const [data, setData] = useState([]);
     const [sorted, setSorted] = useState([]);
     const [isLoaded, setisLoaded] = useState(false);
-    const [region, setRegion] = useState();
+    const [region, setRegion] = useState(0);
 
 
     const desc = () => {
@@ -36,6 +36,21 @@ function CountryList() {
         console.log(filter)
     }
 
+
+    const reset = async () => {
+        try {
+            const response = await fetch('https://restcountries.com/v2/all?fields=name,region,area');
+            const countries = await response.json();
+            setData(countries);
+            setisLoaded(true);
+            console.log(Math.ceil(countries.length / 5))
+            setRegion(0)
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -60,6 +75,7 @@ function CountryList() {
                 filterarea={filterArea}
                 oceanicregion={oceanicRegion}
                 region={region}
+                reset={reset}
             />
             {
                 sorted.length > 0
