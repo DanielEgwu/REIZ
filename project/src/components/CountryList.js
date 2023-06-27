@@ -7,6 +7,8 @@ function CountryList() {
     const [data, setData] = useState([]);
     const [sorted, setSorted] = useState([]);
     const [isLoaded, setisLoaded] = useState(false);
+    const [region, setRegion] = useState();
+
 
     const desc = () => {
         const new_data = [...data].sort((a, b) => b.name.localeCompare(a.name));
@@ -19,7 +21,7 @@ function CountryList() {
     }
     const filterArea = () => {
         const areafilter = data.filter(country => country.area < 65300);
-        setSorted(areafilter);
+        setData(areafilter);
         console.log(areafilter)
     }
 
@@ -27,9 +29,10 @@ function CountryList() {
         const searchfilter = ['Australia', 'New Zealand', 'Tuvalu', 'Samoa', 'Tonga', 'Papua New Guinea',
             'Solomon Islands', 'Vanuatu', 'Fiji', 'Palau', 'Micronesia', 'Marshall Islands', 'Kiribati', 'Nauru'
         ]
+        setRegion(1)
         // const searchfilter = ['Afghanistan']
         const filter = data.filter(country => searchfilter.includes(country.name));
-        setSorted(filter);
+        setData(filter);
         console.log(filter)
     }
 
@@ -56,6 +59,7 @@ function CountryList() {
                 asc={asc}
                 filterarea={filterArea}
                 oceanicregion={oceanicRegion}
+                region={region}
             />
             {
                 sorted.length > 0
