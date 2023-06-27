@@ -23,6 +23,16 @@ function CountryList() {
         console.log(areafilter)
     }
 
+    const oceanicRegion = () => {
+        const searchfilter = ['Australia', 'New Zealand', 'Tuvalu', 'Samoa', 'Tonga', 'Papua New Guinea',
+            'Solomon Islands', 'Vanuatu', 'Fiji', 'Palau', 'Micronesia', 'Marshall Islands', 'Kiribati', 'Nauru'
+        ]
+        // const searchfilter = ['Afghanistan']
+        const filter = data.filter(country => searchfilter.includes(country.name));
+        setSorted(filter);
+        console.log(filter)
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -42,7 +52,11 @@ function CountryList() {
 
     return (
         <Fragment>
-            <Filter desc={desc} asc={asc} filterarea={filterArea} />
+            <Filter desc={desc}
+                asc={asc}
+                filterarea={filterArea}
+                oceanicregion={oceanicRegion}
+            />
             {
                 sorted.length > 0
                     ? sorted.map(item => <Country key={item.name} country={item} />)
