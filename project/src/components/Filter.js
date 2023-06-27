@@ -13,7 +13,7 @@ function Filter(props) {
 
                 <div className='d-md-flex  gap-3'>
 
-                    <button  className='btn btn-success rounded-3 mb-md-2 mb-3' >Filter by smaller than Lithuania by area.</button>
+                    <button onClick={props.filterarea} className='btn btn-success rounded-3 mb-md-2 mb-3' >Filter by smaller than Lithuania by area.</button>
                     <button className='btn btn-success rounded-3 mb-md-2 mb-3  '>Oceania region</button>
                 </div>
                 <div className=' d-md-flex d-block gap-3 '> 

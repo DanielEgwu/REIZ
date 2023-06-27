@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState,  } from 'react';
+import React, { Fragment, useEffect, useState, } from 'react';
 import Filter from './Filter';
 import Country from './Country';
 
@@ -9,16 +9,18 @@ function CountryList() {
     const [isLoaded, setisLoaded] = useState(false);
 
     const desc = () => {
-        const new_data = [...data].sort((a, b) => b.name.localeCompare(a.name))
-        setSorted(new_data)
+        const new_data = [...data].sort((a, b) => b.name.localeCompare(a.name));
+        setSorted(new_data);
     }
 
     const asc = () => {
-        const new_data = [...data].sort((a, b) => a.name.localeCompare(b.name))
-        setSorted(new_data)
+        const new_data = [...data].sort((a, b) => a.name.localeCompare(b.name));
+        setSorted(new_data);
     }
-    const filterArea = () =>{
-
+    const filterArea = () => {
+        const areafilter = data.filter(country => country.area < 65300);
+        setSorted(areafilter);
+        console.log(areafilter)
     }
 
     useEffect(() => {
@@ -40,11 +42,11 @@ function CountryList() {
 
     return (
         <Fragment>
-            <Filter desc={desc} asc={asc} />
+            <Filter desc={desc} asc={asc} filterarea={filterArea} />
             {
-              sorted.length > 0
-              ? sorted.map(item => <Country key={item.name} country={item} />)
-              : data.map(item => <Country key={item.name} country={item} />)
+                sorted.length > 0
+                    ? sorted.map(item => <Country key={item.name} country={item} />)
+                    : data.map(item => <Country key={item.name} country={item} />)
                 // data.map(item => <Country key={item.name} country={item} />)
             }
 
